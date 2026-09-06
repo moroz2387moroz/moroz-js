@@ -90,10 +90,6 @@ const appData = {
     }
   },
 
-  showTypeOff(item) {
-    console.log(item, typeof item);
-  },
-
   logger: function () {
     console.showTypeOff(appData.fullPrice);
     console.log(appData.servicePercentPrice);
