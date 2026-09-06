@@ -11,6 +11,9 @@ let servicePrice1 = +prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice2 = +prompt("Сколько это будет стоить?");
 let rollback = 19;
+let fullPrice;
+let allServicePrices;
+let servicePercentPrice;
 
 //Урок 4
 
@@ -18,13 +21,9 @@ const getAllServicePrices = function () {
   return servicePrice1 + servicePrice2;
 };
 
-let allServicePrices = getAllServicePrices();
-
 function getFullPrice() {
   return screenPrice + allServicePrices;
 }
-
-let fullPrice = getFullPrice();
 
 const getTitle = () => {
   const normalizedTitle = (title || "").trim();
@@ -35,33 +34,34 @@ const getTitle = () => {
   );
 };
 
-title = getTitle();
-
 const getServicePercentPrices = () => {
   return fullPrice - Math.ceil(fullPrice * (rollback / 100));
 };
 
-let servicePercentPrice = getServicePercentPrices();
-
-const showTypeOff = function (item) {
-  console.log(item, typeof item);
-};
-
-const getRollbackMessage = function () {
-  if (fullPrice >= 30000) {
+const getRollbackMessage = function (price) {
+  if (price >= 30000) {
     return "Даем скидку в 10%";
-  } else if (fullPrice >= 15000 && fullPrice < 30000) {
+  } else if (price >= 15000 && fullPrice < 30000) {
     return "Даем скидку в 5%";
-  } else if (fullPrice >= 0 && fullPrice < 15000) {
+  } else if (price >= 0 && fullPrice < 15000) {
     return "Скидка не предусмотрена";
   } else {
     return "Что то пошло не так";
   }
 };
+const showTypeOff = function (item) {
+  console.log(item, typeof item);
+};
 
+fullPrice = getFullPrice();
+allServicePrices = getAllServicePrices();
+servicePercentPrice = getServicePercentPrices();
+title = getTitle();
+
+
+console.log(getRollbackMessage(fullPrice));
 showTypeOff(title);
 showTypeOff(fullPrice);
 showTypeOff(adaptive);
-console.log(screens);
-console.log(getRollbackMessage());
+console.log(screens.length);
 console.log(servicePercentPrice);
