@@ -12,7 +12,7 @@ const appData = {
 
   start: function () {
     appData.asking();
-    appData.getAllServicePrices();
+    appData.addPrices();
     appData.getFullPrice();
     appData.getServicePercentPrices();
     appData.getTitle();
@@ -26,13 +26,6 @@ const appData = {
 
   asking: function () {
     appData.title = prompt("Как называется ваш проект?");
-    // appData.screens = prompt(
-    //   "Какие типы экранов нужно разработать?",
-    //   "Простые, Сложные, Интерактивные",
-    // );
-    // do {
-    //   appData.screenPrice = prompt("Сколько будет стоить данная работа?");
-    // } while (!appData.isNumber(appData.screenPrice));
 
     for (let i = 0; i < 2; i++) {
       let name = prompt("Какие типы экранов нужно разработать?");
@@ -58,7 +51,11 @@ const appData = {
     appData.adaptive = confirm("Нужен адаптив на сайте?");
   },
 
-  getAllServicePrices: function () {
+  addPrices: function (price) {
+    for (let screen of appData.screens) {
+      appData.screenPrice += +screen.price;
+    }
+
     for (const key in appData.services) {
       appData.allServicePrices += appData.services[key];
     }
