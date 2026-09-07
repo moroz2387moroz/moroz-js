@@ -94,6 +94,8 @@ const appData = {
   },
 
   logger: function () {
+    console.log(appData.fullPrice);
+    console.log(appData.servicePercentPrice);
     for (const property in appData) {
       console.log(property, appData[property]);
     }
