@@ -21,25 +21,46 @@ const appData = {
   },
 
   isNumber: function (num) {
-    return !isNaN(parseFloat(num)) && isFinite(num);
+    return (
+      !isNaN(parseFloat(num)) && isFinite(num) && !/\p{L}/u.test(num)
+    );
+  },
+
+  isText: function (text) {
+    return (
+      typeof text === "string" &&
+      text.trim() !== "" &&
+      /\p{L}/u.test(text)
+    );
   },
 
   asking: function () {
-    appData.title = prompt("Как называется ваш проект?");
+    do {
+      appData.title = prompt("Как называется ваш проект?");
+    } while (!appData.isText(appData.title));
 
     for (let i = 0; i < 2; i++) {
-      let name = prompt("Какие типы экранов нужно разработать?");
+      let name;
+
+      do {
+        name = prompt("Какие типы экранов нужно разработать?");
+      } while (!appData.isText(name));
+
       let price = 0;
 
       do {
         price = prompt("Сколько будет стоить данная работа?");
       } while (!appData.isNumber(price));
 
-      appData.screens.push({ id: i, name: name, price: +price });
+      appData.screens.push({ id: i, typeScreen: name, price: +price });
     }
 
     for (let i = 0; i < 2; i++) {
-      let name = prompt("Какой дополнительный тип услуги нужен?");
+      let name;
+
+      do {
+        name = prompt("Какой дополнительный тип услуги нужен?");
+      } while (!appData.isText(name));
       let price = 0;
 
       do {
