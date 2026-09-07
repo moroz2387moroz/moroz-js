@@ -70,12 +70,15 @@ const appData = {
   },
 
   getTitle: function () {
-    const normalizedTitle = (this.title || "").trim();
+    appData.title.trim()[0].toUpperCase() +
+      appData.title.trim().substr(1).toLowerCase();
 
-    return (
-      normalizedTitle.charAt(0).toUpperCase() +
-      normalizedTitle.slice(1).toLowerCase()
-    );
+    // const normalizedTitle = (this.title || "").trim();
+
+    // return (
+    //   normalizedTitle.charAt(0).toUpperCase() +
+    //   normalizedTitle.slice(1).toLowerCase()
+    // );
   },
 
   getRollbackMessage: function (price) {
