@@ -66,16 +66,17 @@ const appData = {
       do {
         price = prompt("Сколько это будет стоить?");
       } while (!appData.isNumber(price));
-      appData.services[name] = +price;
+      appData.services[name + "_" + i] = +price;
     }
 
     appData.adaptive = confirm("Нужен адаптив на сайте?");
   },
 
   addPrices: function (price) {
-    for (let screen of appData.screens) {
-      appData.screenPrice += +screen.price;
-    }
+    appData.screenPrice = appData.screens.reduce(
+      (total, screen) => total + +screen.price,
+      0
+    );
 
     for (const key in appData.services) {
       appData.allServicePrices += appData.services[key];
